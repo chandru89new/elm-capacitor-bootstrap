@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@capacitor/android": "^3.3.2",
+    "@capacitor/cli": "^3.3.2",
+    "@capacitor/core": "^3.3.2",
+    "@capacitor/toast": "^1.0.7",
+    "autoprefixer": "^10.4.0",
+    "cssnano": "^5.0.10",
+    "nodemon": "^2.0.15",
+    "parcel": "^2.2.1",
+    "postcss": "^8.3.11",
+    "postcss-cli": "^9.0.2",
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^2.2.19",
+    "uglify-js": "^3.14.3"
+  },
+  "scripts": {
+    "build-css": "postcss ./src/css/index.css -o ./src/css/app.css",
+    "dev-build-elm": "elm make src/Main.elm --output ./src/js/main.js",
+    "build-elm": "elm make src/Main.elm --optimize --output ./src/js/main.js && uglifyjs ./src/js/main.js --compress 'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe' | uglifyjs --mangle --output ./src/js/main.js",
+    "build": "yarn build-css && yarn build-elm && parcel build src/index.html",
+    "dev-build": "yarn build-css && yarn dev-build-elm && parcel build src/index.html",
+    "cap": "yarn capacitor run",
+    "dev-dep-android": "yarn dev-build && yarn cap android",
+    "dev-dep-ios": "yarn dev-build && yarn cap ios"
+  },
+  "license": "0BSD"
+}
