@@ -1,5 +1,8 @@
 node_modules
 elm-stuff
-dist
-.parcel-cache
 *.keystore
+android
+public/js/elm.js
+public/css/style.css
+web
+.parcel-cache

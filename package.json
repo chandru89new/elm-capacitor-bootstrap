@@ -1,28 +1,22 @@
 {
   "dependencies": {
-    "@capacitor/android": "^3.3.2",
-    "@capacitor/cli": "^3.3.2",
-    "@capacitor/core": "^3.3.2",
-    "@capacitor/toast": "^1.0.7",
-    "autoprefixer": "^10.4.0",
-    "cssnano": "^5.0.10",
-    "nodemon": "^2.0.15",
-    "parcel": "^2.2.1",
-    "postcss": "^8.3.11",
-    "postcss-cli": "^9.0.2",
-    "postcss-import": "^14.0.2",
-    "tailwindcss": "^2.2.19",
+    "@capacitor/android": "^5.2.3",
+    "@capacitor/cli": "^5.2.3",
+    "@capacitor/core": "^5.2.3",
+    "@capacitor/toast": "^5.0.6",
+    "tailwindcss": "^3.3.3",
     "uglify-js": "^3.14.3"
   },
   "scripts": {
-    "build-css": "postcss ./src/css/index.css -o ./src/css/app.css",
-    "dev-build-elm": "elm make src/Main.elm --output ./src/js/main.js",
-    "build-elm": "elm make src/Main.elm --optimize --output ./src/js/main.js && uglifyjs ./src/js/main.js --compress 'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe' | uglifyjs --mangle --output ./src/js/main.js",
-    "build": "yarn build-css && yarn build-elm && parcel build src/index.html",
-    "dev-build": "yarn build-css && yarn dev-build-elm && parcel build src/index.html",
-    "cap": "yarn capacitor run",
-    "dev-dep-android": "yarn dev-build && yarn cap android",
-    "dev-dep-ios": "yarn dev-build && yarn cap ios"
+    "build-css": "tailwindcss -i ./public/css/index.css -o ./public/css/style.css --minify",
+    "build-elm": "elm make src/Main.elm --optimize --output ./public/js/elm.js && uglifyjs ./public/js/elm.js --compress 'pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe' | uglifyjs --mangle --output ./public/js/elm.js",
+    "build": "yarn build-css && yarn build-elm && yarn parcel build public/index.html --dist-dir web && yarn cap sync",
+    "build-elm-debug": "elm make src/Main.elm --output ./public/js/elm.js",
+    "build-css-debug": "tailwind -i ./public/css/index.css -o ./public/css/style.css",
+    "dev-build": "yarn build-css-debug && yarn build-elm-debug && yarn parcel build public/index.html --dist-dir web && yarn cap sync"
   },
-  "license": "0BSD"
+  "license": "0BSD",
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
 }

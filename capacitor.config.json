@@ -1,6 +1,9 @@
 {
-  "appId": "com.druchan.elmtest",
-  "appName": "ElmTest",
-  "webDir": "dist",
-  "bundledWebRuntime": false
+  "appId": "com.example.elmcapacitor",
+  "appName": "ElmCapacitor",
+  "webDir": "web",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
 }

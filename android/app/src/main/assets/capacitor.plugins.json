@@ -1,6 +1,0 @@
-[
-	{
-		"pkg": "@capacitor/toast",
-		"classpath": "com.capacitorjs.plugins.toast.ToastPlugin"
-	}
-]

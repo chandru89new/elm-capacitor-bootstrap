@@ -2,33 +2,63 @@
 
 This is a small bootstrap / starter pack for building mobile apps using Elm and Capacitor.
 
-Step 0: Run `yarn`!
+1. Requirements
+2. Setup
+3. Development - Elm
+4. Development - JS, CSS, etc.
+6. Build
 
-**writing Elm code**
+## 1. Requirements
 
-Write all your Elm code and put them in files inside the /src folder. You can have sub-folders and whatnot, but the `Main.elm` file should be in `/src` top level.
+You'll need these:
 
-**writing custom JS / Capacitor glue code**
+- Node (any latest) and `yarn`.
+- Android Studio and Android SDK.
+- After installing Android Studio and Android SDK, add a system image that has a `Target` of `Android 11.0` (as Capacitor seems to work with that version well).
 
-You might have to write a bunch of custom JS and Capacitor-specific JS code. Do these in the `/src/js` folder. Whatever you do, these have to be ultimately either imported and used in the `/src/js/index.js` file or make sure you include those files in the `./src/index.html` file as `<script type="module" src="....">`. Don't forget the `type="module"` thing. Otherwise, you cant compile because of ES6 thingy.
+## 2. Setup
 
-**CSS and styling the app**
+- Clone this repo locally.
+- Then run `yarn install` in the folder.
+- Run a `yarn build` to compile the project once.
 
-All styles are in the `/src/css` folder. I use postcss to compile and compress all CSS into a single file. To do this efficiently, there is an `/src/css/index.css` file. This is the entry-point for postcss - meaning, you can write css in as many files as you want but make sure all of that gets imported in `index.css`. The final output is the `src/css/app.css` file. This file gets called in the `/src/index.html` file.
+If you have Android Studio and Android SDK and a device setup, you can now view / run the project in an emulator by:
 
-**Do not touch/modify these files**
+- running `yarn cap open android`,
+- and then running the project in Android Studio.
 
-These are generated files. It's not that you are prohibited from touching them... it's just that minification makes it hard to know what you're doing if you edit them. So, better don't.
+## 3. Development - Elm
 
+- All Elm source files are in `src/*.elm`. 
+- When you make changes and want to test them, just run `yarn build` or `yarn dev-build` (debug mode).
+
+## 4. Development - JS, CSS etc.
+
+### JS
+
+- All custom JS is in `public/js/index.js`.
+- You can add more JS files there.
+- All Capacitor-related code would ideally go here.
+- Remember to include those files in your `public/index.html` via `<script>` tags.
+- If you use `import` statements, make sure you add `type="module"`. Eg. `<script src="./js/custom.js" type="module"></script>`.
+
+### CSS
+
+- Add all custom CSS files in `public/css`.
+- The project uses Tailwind so you can also use Tailwind classes anywhere in your `Elm` files and in `public/index.html` along with using them via `@apply` in `index.css` and elsewhere.
+
+*Anytime you make changes to JS, CSS, HTML or Elm files, make sure to run `yarn build` or `yarn dev-build`. There is no HMR. You can setup a custom `nodemon` / watcher to have a pseudo-HMR experience.*
+
+## 5. Build
+
+- If you want to build the project for production:
+
+```bash
+> yarn build
 ```
-/src/js/main.js
-/src/css/app.css
+
+- If you'd like Elm's `Debug` to be allowed:
+
+```bash
+> yarn dev-build
 ```
-
-**running a dev build/deploy**
-
-Because this is a mobile app starter pack, there is no hot-reload. There's just "build and deploy" everytime you make changes. (That is, if you want to view the changes on an emulator or a phone).
-
-Dev build and deploy/run: `yarn dev-dep-android` or `yarn dev-dep-ios`
-
-(consult Capacitor docs for making sure you have all the capacitor-specific things setup prior to deploying to a device/emulator)
